@@ -82,60 +82,6 @@
 \thesisdegree{Degree Name}
 \thesisdate{\today}
 
-% --- Chapter headings (full-page cover in main matter; default style otherwise) ---
-\newcommand{\thesis@plainchapterhead}[1]{%
-  \vspace*{50\p@}%
-  {\parindent \z@ \raggedright \normalfont
-    \ifnum \c@secnumdepth >\m@ne
-      \if@mainmatter
-        \huge\bfseries \@chapapp\space \thechapter
-        \par\nobreak
-        \vskip 20\p@
-      \fi
-    \fi
-    \Huge \bfseries #1\par\nobreak
-    \vskip 40\p@
-  }%
-}
-
-\newcommand{\thesis@chaptercover}[1]{%
-  \thispagestyle{empty}%
-  \begingroup
-    \setlength{\parindent}{0pt}%
-    \vspace*{\fill}%
-    \begin{center}
-      {\sffamily\large\MakeUppercase{\@chapapp\space\thechapter}\par}
-      \vspace{0.35in}
-      {\fontsize{36pt}{42pt}\selectfont #1\par}
-      \vspace{0.35in}
-      {\sffamily\large\phantom{\MakeUppercase{\@chapapp\space\thechapter}}\par}
-    \end{center}%
-    \vspace*{\fill}%
-  \endgroup
-  \clearpage
-}
-
-\renewcommand{\@makechapterhead}[1]{%
-  \ifnum \c@secnumdepth >\m@ne
-    \if@mainmatter
-      \thesis@chaptercover{#1}%
-    \else
-      \thesis@plainchapterhead{#1}%
-    \fi
-  \else
-    \thesis@plainchapterhead{#1}%
-  \fi
-}
-
-\renewcommand{\@makeschapterhead}[1]{%
-  \vspace*{50\p@}%
-  {\parindent \z@ \raggedright
-    \normalfont
-    \Huge \bfseries #1\par\nobreak
-    \vskip 40\p@
-  }%
-}
-
 \let\thesis@frontmatter\frontmatter
 \renewcommand{\frontmatter}{%
   \thesis@frontmatter

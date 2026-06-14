@@ -1,6 +1,6 @@
 .DS_Store
 
-## LaTeX build artifacts
+# LaTeX build artifacts
 *.aux
 *.bbl*
 *.bcf
@@ -27,3 +27,4 @@
 *.glg
 *.glo
 *.gls
+*.pdf

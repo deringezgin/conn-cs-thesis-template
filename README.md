@@ -8,14 +8,15 @@ or capstone work.
 - `first_last_thesis.tex`: main thesis file and document entry point
 - `thesis-style.sty`: formatting, title page, theorem, code, bibliography, and page style settings
 - `frontmatter/`: dedication, abstract, and acknowledgments
-- `chapters/`: chapter files (e.g. `example.tex`, `example-appendix.tex` after `\appendix` in `first_last_thesis.tex`)
+- `chapters/main/`: main thesis chapter files
+- `chapters/appendix/`: appendix chapter files, included after `\appendix` in `first_last_thesis.tex`
 - `references/references.bib`: bibliography database
 - `figures/`: suggested location for images and diagrams
 
 ## Quick Start
 
 1. Update thesis metadata at the top of `first_last_thesis.tex`.
-2. Replace placeholder text in `frontmatter/` and `chapters/`.
+2. Replace placeholder text in `frontmatter/`, `chapters/main/`, and `chapters/appendix/`.
 3. Add references in `references/references.bib`.
 4. Build the PDF.
 
