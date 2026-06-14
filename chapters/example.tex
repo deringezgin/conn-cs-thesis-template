@@ -1,0 +1,58 @@
+\chapter{Example Chapter}
+
+This chapter demonstrates the section hierarchy, a sample table, and a placeholder
+figure. Replace this file with your real chapters when you start writing.
+
+\section{Example Section}
+
+Introductory paragraph for the example section. Here is a sample parenthetical
+citation: \citep{knuth1984literate}. A textual citation uses
+\citet{knuth1984literate}.
+
+\subsection{Example Subsection}
+
+Body text under the subsection.
+
+\subsubsection{Example Sub-subsection}
+ 
+Body text under the sub-subsection.
+
+\paragraph{Example paragraph heading.}
+This line demonstrates \verb|\paragraph|: it produces a run-in heading (bold,
+inline with the text that follows) rather than a displayed heading like sections
+and subsections.
+
+Here is a sample display equation (numbered automatically).
+\begin{equation}
+  \label{eq:example}
+  \int_{a}^{b} f'(x)\,dx = f(b) - f(a).
+\end{equation}
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lccc}
+    \toprule
+    Item & Value A & Value B & Notes \\
+    \midrule
+    Alpha & 42.7 & 18.3 & placeholder \\
+    Beta & 91.0 & 55.2 & placeholder \\
+    Gamma & 3.14 & 2.71 & placeholder \\
+    Delta & 0.88 & 0.12 & placeholder \\
+    \bottomrule
+  \end{tabular}
+  \caption{Example table with placeholder data.}
+  \label{tab:example-placeholder}
+\end{table}
+
+\begin{figure}[ht]
+  \centering
+  \fbox{%
+    \parbox[c][0.28\textheight][c]{0.75\textwidth}{%
+      \centering
+      \small
+      Placeholder figure.
+    }%
+  }
+  \caption{Example figure placeholder.}
+  \label{fig:example-placeholder}
+\end{figure}

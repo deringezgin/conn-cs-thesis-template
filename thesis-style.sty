@@ -1,0 +1,183 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thesis-style}[2026/04/25 Computer Science honors thesis style]
+
+% --- Packages (load order: biblatex before hyperref; cleveref after hyperref) ---
+\RequirePackage[letterpaper]{geometry}
+\RequirePackage{setspace}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\RequirePackage{csquotes}
+\RequirePackage[
+  style=authoryear,
+  maxbibnames=10,
+  maxcitenames=2,
+  uniquename=false,
+  language=american,
+  natbib=true
+]{biblatex}
+\addbibresource{references/references.bib}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+
+% --- Page body and paragraph spacing ---
+\setstretch{1.5}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlength{\oddsidemargin}{36.1pt}
+\setlength{\evensidemargin}{36.1pt}
+\setlength{\marginparwidth}{40pt}
+\setlength{\marginparsep}{10pt}
+\setlength{\topmargin}{0pt}
+\setlength{\headsep}{0.5in}
+\setlength{\textheight}{8.1in}
+\setlength{\textwidth}{6in}
+\brokenpenalty=10000
+
+\pagestyle{headings}
+
+% --- Code listings ---
+\definecolor{codebackground}{RGB}{248,248,248}
+\definecolor{codecomment}{RGB}{80,120,80}
+\definecolor{codekeyword}{RGB}{40,80,160}
+
+\lstdefinestyle{thesiscode}{
+  backgroundcolor=\color{codebackground},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  commentstyle=\color{codecomment},
+  keywordstyle=\color{codekeyword}\bfseries,
+  numbers=left,
+  numberstyle=\tiny,
+  showstringspaces=false,
+  tabsize=2
+}
+\lstset{style=thesiscode}
+
+% --- Theorems ---
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\makeatletter
+
+% --- Thesis metadata (set values in first_last_thesis.tex) ---
+\newcommand{\thesistitle}[1]{\def\@thesistitle{#1}}
+\newcommand{\thesisauthor}[1]{\def\@thesisauthor{#1}}
+\newcommand{\thesisinstitution}[1]{\def\@thesisinstitution{#1}}
+\newcommand{\thesisdepartment}[1]{\def\@thesisdepartment{#1}}
+\newcommand{\thesisdegree}[1]{\def\@thesisdegree{#1}}
+\newcommand{\thesisdate}[1]{\def\@thesisdate{#1}}
+
+\thesistitle{Thesis Title}
+\thesisauthor{Author Name}
+\thesisinstitution{Institution Name}
+\thesisdepartment{Department Name}
+\thesisdegree{Degree Name}
+\thesisdate{\today}
+
+% --- Chapter headings (full-page cover in main matter; default style otherwise) ---
+\newcommand{\thesis@plainchapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+    \fi
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }%
+}
+
+\newcommand{\thesis@chaptercover}[1]{%
+  \thispagestyle{empty}%
+  \begingroup
+    \setlength{\parindent}{0pt}%
+    \vspace*{\fill}%
+    \begin{center}
+      {\sffamily\large\MakeUppercase{\@chapapp\space\thechapter}\par}
+      \vspace{0.35in}
+      {\fontsize{36pt}{42pt}\selectfont #1\par}
+      \vspace{0.35in}
+      {\sffamily\large\phantom{\MakeUppercase{\@chapapp\space\thechapter}}\par}
+    \end{center}%
+    \vspace*{\fill}%
+  \endgroup
+  \clearpage
+}
+
+\renewcommand{\@makechapterhead}[1]{%
+  \ifnum \c@secnumdepth >\m@ne
+    \if@mainmatter
+      \thesis@chaptercover{#1}%
+    \else
+      \thesis@plainchapterhead{#1}%
+    \fi
+  \else
+    \thesis@plainchapterhead{#1}%
+  \fi
+}
+
+\renewcommand{\@makeschapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }%
+}
+
+\let\thesis@frontmatter\frontmatter
+\renewcommand{\frontmatter}{%
+  \thesis@frontmatter
+  \pagestyle{plain}%
+}
+
+\let\thesis@mainmatter\mainmatter
+\renewcommand{\mainmatter}{%
+  \thesis@mainmatter
+  \pagestyle{headings}%
+}
+
+% --- Title page ---
+\newcommand{\makethesistitle}{%
+  \hypersetup{pageanchor=false}%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \null\vskip1in
+    \begin{center}
+      \large\MakeUppercase{\@thesistitle}
+    \end{center}
+    \vfill
+    \begin{center}
+      \large
+      AN UNDERGRADUATE HONORS THESIS\\
+      SUBMITTED TO THE \MakeUppercase{\@thesisdepartment}\\
+      AT \MakeUppercase{\@thesisinstitution}\\
+      IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\\
+      FOR THE DEGREE OF\\
+      \MakeUppercase{\@thesisdegree}
+    \end{center}
+    \vfill
+    \begin{center}
+      {\rmfamily\textsc{\@thesisauthor}}\\
+      \@thesisdate
+    \end{center}
+    \vskip.5in
+  \end{titlepage}
+  \clearpage
+  \hypersetup{pageanchor=true}%
+  \pagenumbering{roman}%
+  \pagestyle{plain}%
+}
+
+\makeatother

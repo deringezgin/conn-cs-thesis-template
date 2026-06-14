@@ -1,0 +1,34 @@
+\documentclass[12pt, oneside]{book}
+\usepackage{lmodern}
+\usepackage{thesis-style}
+
+\thesistitle{Your Thesis Title}
+\thesisauthor{Your Name}
+\thesisinstitution{Connecticut College}
+\thesisdepartment{Department of Computer Science}
+\thesisdegree{Bachelor of Arts with Honors in Computer Science}
+\thesisdate{Month Year}
+
+\begin{document}
+
+\frontmatter
+\makethesistitle
+
+\input{frontmatter/dedication}
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgments}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+\input{chapters/example}
+
+\appendix
+\input{chapters/example-appendix}
+
+\backmatter
+\printbibliography[title={References}]
+
+\end{document}
