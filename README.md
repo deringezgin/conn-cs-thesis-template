@@ -33,3 +33,21 @@ Set the optional dedication in the preamble of `first_last_thesis.tex`:
 
 A nonempty dedication is generated automatically after the committee page. Use
 `\dedication{}` to omit the dedication page.
+
+## Citations
+
+The `frontmatter/citations.tex` page identifies material from the thesis that
+has appeared, or may appear, in another publication. It is included after the
+abstract and provides headings for three publication states:
+
+```tex
+\citationheadingpublished
+\citationheadingaccepted{Publication Venue}{Month Day, Year}
+\citationheadingsubmitted{Publication Venue}{Month Day, Year}
+```
+
+Use one heading and replace the sample citation with the complete publication
+citation. If the publication is in `references/references.bib`, you can format
+it from its BibTeX entry with `\fullcite{your-publication-key}`. Comment out the
+`\input{frontmatter/citations}` line in `first_last_thesis.tex` when the thesis
+does not need this page.

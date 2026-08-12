@@ -78,6 +78,34 @@
 \newcommand{\thesisdate}[1]{\def\@thesisdate{#1}}
 \newcommand{\dedication}[1]{\def\@thesisdedication{#1}}
 
+% --- Prior-publication citation page ---
+\newcommand{\citationheadingpublished}{%
+  Material from this thesis has been published in the following form:\par
+  \vspace{2em}%
+}
+
+\newcommand{\citationheadingaccepted}[2]{%
+  Material from this thesis was accepted for publication in #1 on #2 in the
+  following form:\par
+  \vspace{2em}%
+}
+
+\newcommand{\citationheadingsubmitted}[2]{%
+  Material from this thesis was submitted for publication to #1 on #2 in the
+  following form:\par
+  \vspace{2em}%
+}
+
+\newenvironment{citations}{%
+  \chapter*{Citations}%
+  \addcontentsline{toc}{chapter}{Citations}%
+  \begingroup
+  \singlespacing
+}{%
+  \endgroup
+  \clearpage
+}
+
 % Add committee members by repeating \advisor and \reader in the preamble.
 \newcount\thesis@advisorcount
 \newcount\thesis@readercount
