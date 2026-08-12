@@ -75,6 +75,38 @@
 \newcommand{\thesisdegree}[1]{\def\@thesisdegree{#1}}
 \newcommand{\thesisdate}[1]{\def\@thesisdate{#1}}
 
+% Add committee members by repeating \advisor and \reader in the preamble.
+\newcount\thesis@advisorcount
+\newcount\thesis@readercount
+
+\newcommand{\advisor}[3]{%
+  \ifnum\thesis@advisorcount<3
+    \global\advance\thesis@advisorcount\@ne
+    \ifcase\thesis@advisorcount\relax
+    \or \gdef\thesis@advisor@one{\thesis@committeeperson{#1}{#2}{#3}}%
+    \or \gdef\thesis@advisor@two{\thesis@committeeperson{#1}{#2}{#3}}%
+    \or \gdef\thesis@advisor@three{\thesis@committeeperson{#1}{#2}{#3}}%
+    \fi
+  \else
+    \PackageError{thesis-style}{At most three advisors are supported}%
+      {Remove an \string\advisor\space command from the thesis preamble.}%
+  \fi
+}
+
+\newcommand{\reader}[3]{%
+  \ifnum\thesis@readercount<3
+    \global\advance\thesis@readercount\@ne
+    \ifcase\thesis@readercount\relax
+    \or \gdef\thesis@reader@one{\thesis@committeeperson{#1}{#2}{#3}}%
+    \or \gdef\thesis@reader@two{\thesis@committeeperson{#1}{#2}{#3}}%
+    \or \gdef\thesis@reader@three{\thesis@committeeperson{#1}{#2}{#3}}%
+    \fi
+  \else
+    \PackageError{thesis-style}{At most three readers are supported}%
+      {Remove a \string\reader\space command from the thesis preamble.}%
+  \fi
+}
+
 \thesistitle{Thesis Title}
 \thesisauthor{Author Name}
 \thesisinstitution{Institution Name}
@@ -101,7 +133,7 @@
     \thispagestyle{empty}
     \null\vskip1in
     \begin{center}
-      \large\MakeUppercase{\@thesistitle}
+      {\LARGE\scshape \@thesistitle\par}
     \end{center}
     \vfill
     \begin{center}
@@ -124,6 +156,83 @@
   \hypersetup{pageanchor=true}%
   \pagenumbering{roman}%
   \pagestyle{plain}%
+}
+
+% --- Committee page ---
+\newcommand{\thesis@committeeperson}[3]{%
+  {\large #1\par}%
+  \vspace{0.08in}%
+  {\normalsize\itshape #2\par}%
+  \vspace{0.06in}%
+  {\normalsize #3\par}%
+}
+
+\newcommand{\thesis@committeeentry}[2]{%
+  \begin{minipage}[t]{#1}
+    \centering
+    #2
+  \end{minipage}%
+}
+
+\newcommand{\thesis@committeegrid}[2]{%
+  \ifcase#1\relax
+  \or
+    \noindent\makebox[\textwidth][c]{%
+      \thesis@committeeentry{0.58\textwidth}{\csname thesis@#2@one\endcsname}%
+    }\par
+  \or
+    \noindent
+    \thesis@committeeentry{0.44\textwidth}{\csname thesis@#2@one\endcsname}%
+    \hfill
+    \thesis@committeeentry{0.44\textwidth}{\csname thesis@#2@two\endcsname}%
+    \par
+  \or
+    \noindent
+    \thesis@committeeentry{0.30\textwidth}{\csname thesis@#2@one\endcsname}%
+    \hfill
+    \thesis@committeeentry{0.30\textwidth}{\csname thesis@#2@two\endcsname}%
+    \hfill
+    \thesis@committeeentry{0.30\textwidth}{\csname thesis@#2@three\endcsname}%
+    \par
+  \fi
+}
+
+\newcommand{\makethesiscommittee}{%
+  \ifnum\thesis@advisorcount<1
+    \PackageError{thesis-style}{No thesis advisor was specified}%
+      {Add at least one \string\advisor\string{Name\string}\string{Title\string}\string{Affiliation\string}\space command.}%
+  \fi
+  \ifnum\thesis@readercount<1
+    \PackageError{thesis-style}{No thesis reader was specified}%
+      {Add at least one \string\reader\string{Name\string}\string{Title\string}\string{Affiliation\string}\space command.}%
+  \fi
+  \hypersetup{pageanchor=false}%
+  \thispagestyle{empty}%
+  \begingroup
+  \setlength{\parindent}{0pt}%
+  \begin{center}
+    \vspace*{0.75in}%
+    {\LARGE\scshape Thesis Committee\par}
+    \vspace{1.0in}%
+    {\large\scshape
+      \ifnum\thesis@advisorcount=1 Advisor\else Co-Advisors\fi
+      \par}
+    \vspace{0.32in}%
+  \end{center}
+  \thesis@committeegrid{\the\thesis@advisorcount}{advisor}%
+  \begin{center}
+    \vspace{0.8in}%
+    \rule{2.6in}{0.4pt}\par
+    \vspace{0.6in}%
+    {\large\scshape
+      \ifnum\thesis@readercount=1 Reader\else Readers\fi
+      \par}
+    \vspace{0.32in}%
+  \end{center}
+  \thesis@committeegrid{\the\thesis@readercount}{reader}%
+  \endgroup
+  \clearpage
+  \hypersetup{pageanchor=true}%
 }
 
 \makeatother
