@@ -76,6 +76,7 @@
 \newcommand{\thesisdepartment}[1]{\def\@thesisdepartment{#1}}
 \newcommand{\thesisdegree}[1]{\def\@thesisdegree{#1}}
 \newcommand{\thesisdate}[1]{\def\@thesisdate{#1}}
+\newcommand{\dedication}[1]{\def\@thesisdedication{#1}}
 
 % Add committee members by repeating \advisor and \reader in the preamble.
 \newcount\thesis@advisorcount
@@ -115,6 +116,7 @@
 \thesisdepartment{Department Name}
 \thesisdegree{Degree Name}
 \thesisdate{\today}
+\dedication{}
 
 \let\thesis@frontmatter\frontmatter
 \renewcommand{\frontmatter}{%
@@ -184,6 +186,8 @@
   \hypersetup{pageanchor=true}%
   \pagenumbering{roman}%
   \pagestyle{plain}%
+  \makethesiscommittee
+  \makethesisdedication
 }
 
 % --- Committee page ---
@@ -260,6 +264,22 @@
   \thesis@committeegrid{\the\thesis@readercount}{reader}%
   \endgroup
   \clearpage
+  \hypersetup{pageanchor=true}%
+}
+
+% --- Dedication page ---
+\newcommand{\makethesisdedication}{%
+  \ifx\@thesisdedication\@empty
+  \else
+    \hypersetup{pageanchor=false}%
+    \thispagestyle{empty}%
+    \vspace*{1.5in}%
+    \noindent\begin{minipage}{\textwidth}
+      \raggedright\noindent{\textit{\@thesisdedication}}
+    \end{minipage}%
+    \clearpage
+  \fi
+  \setcounter{page}{1}%
   \hypersetup{pageanchor=true}%
 }
 

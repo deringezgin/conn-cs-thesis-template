@@ -7,8 +7,8 @@
 \thesisdepartment{Department of Computer Science}
 \thesisdegree{Bachelor of Arts with Honors in Computer Science}
 \thesisdate{Month Year}
+\dedication{Optional dedication text goes here.}
 
-% Repeat these commands to add committee members (up to three of each).
 \advisor{First Advisor}{Title}{Affiliation}
 \advisor{Second Advisor}{Title}{Affiliation}
 \reader{First Reader}{Title}{Affiliation}
@@ -18,8 +18,6 @@
 \frontmatter
 \makethesistitle
 
-\input{frontmatter/committee}
-\input{frontmatter/dedication}
 \input{frontmatter/abstract}
 \input{frontmatter/acknowledgments}
 
@@ -28,10 +26,10 @@
 \listoftables
 
 \mainmatter
-\input{chapters/main/example}
+\input{chapters/main/_main}
 
 \appendix
-\input{chapters/appendix/example-appendix}
+\input{chapters/appendix/_appendix_main}
 
 \backmatter
 \printbibliography[title={References}]

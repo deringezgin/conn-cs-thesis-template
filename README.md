@@ -17,8 +17,19 @@ repeating `\advisor{...}` and `\reader{...}`:
 \reader{First Reader}{Title}{Affiliation}
 ```
 
-The committee page supports one to three advisors and one to three readers. It
-automatically uses singular or plural role labels and adjusts the member layout
-to the number of people supplied. Each command takes the member's name, title,
-and affiliation, in that order. The title appears in italic between the name and
-affiliation.
+The committee page is generated automatically immediately after the title page.
+It supports one to three advisors and one to three readers, automatically uses
+singular or plural role labels, and adjusts the member layout to the number of
+people supplied. Each command takes the member's name, title, and affiliation,
+in that order. The title appears in italic between the name and affiliation.
+
+## Dedication
+
+Set the optional dedication in the preamble of `first_last_thesis.tex`:
+
+```tex
+\dedication{Optional dedication text goes here.}
+```
+
+A nonempty dedication is generated automatically after the committee page. Use
+`\dedication{}` to omit the dedication page.
