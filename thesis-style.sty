@@ -4,6 +4,7 @@
 % --- Packages (load order: biblatex before hyperref; cleveref after hyperref) ---
 \RequirePackage[letterpaper]{geometry}
 \RequirePackage{setspace}
+\RequirePackage{bold-extra}
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
 \RequirePackage{amsmath}
@@ -126,6 +127,31 @@
   \pagestyle{headings}%
 }
 
+% --- Chapter and frontmatter headings ---
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent\z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth>\m@ne
+      \if@mainmatter
+        {\huge\bfseries\scshape \@chapapp\space\thechapter\par\nobreak}%
+        \vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    {\Huge\bfseries\scshape #1\par\nobreak}%
+    \vskip 40\p@
+  }%
+}
+
+\renewcommand{\@makeschapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent\z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    {\Huge\bfseries\scshape #1\par\nobreak}%
+    \vskip 40\p@
+  }%
+}
+
 % --- Title page ---
 \newcommand{\makethesistitle}{%
   \hypersetup{pageanchor=false}%
@@ -212,7 +238,7 @@
   \setlength{\parindent}{0pt}%
   \begin{center}
     \vspace*{0.75in}%
-    {\LARGE\scshape Thesis Committee\par}
+    {\LARGE\bfseries\scshape Thesis Committee\par}
     \vspace{1.0in}%
     {\large\scshape
       \ifnum\thesis@advisorcount=1 Advisor\else Co-Advisors\fi
